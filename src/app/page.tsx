@@ -25,14 +25,22 @@ async function getWeather(): Promise<Weather> {
   return await res.json();
 }
 
+async function getWeatherNew() {
+  const res = await fetch("http://localhost:3000/api/weather")
+  const data = res.json();
+  console.log(data);
+  return data;
+}
+
 async function getPercentage(): Promise<number> {
-  const weather = await getWeather();
+  const weather = await getWeatherNew();
   return weather.daily.precipitation_probability_max[0];
 }
 
 async function getCities() {
   const url = 'http://localhost:3000/api/city';
   const res = await fetch(url);
+  console.log(res);
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
@@ -42,8 +50,8 @@ async function getCities() {
 }
 
 const calcWord = (perc: number) => {
-  if (perc < 5) return "No";
-  if (perc < 25) return "Probably not";
+  if (perc < 5) return "Not likely";
+  if (perc < 25) return "Possibly";
   if (perc < 50) return "Perhaps";
   if (perc < 75) return "Probably";
   if (perc < 95) return "Most likely";
@@ -66,13 +74,12 @@ export default async function Home() {
   const perc = await getPercentage();
   const icon = calcIcon(perc);
   const word = calcWord(perc);
-  const test = await getCities();
-  console.log(test);
+  const test = await getWeather();
 
   return (
     <div className="min-h-screen min-w-screen flex flex-col items-center justify-center">
       <div className="flex flex-col items-center justify-center space-y-10">
-        <MainInfo perc={perc} word={word} icon={icon} />
+        <MainInfo perc={perc} word={word} icon={icon} test={test} />
       </div>
     </div>
   );

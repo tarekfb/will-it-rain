@@ -1,20 +1,27 @@
-// import { parse } from 'csv-parse';
+import { parse } from "csv-parse";
 export async function GET(request: Request) {
+  const csvFilePath = "/assets/worldcities.csv";
+  // how do i make it take a url
 
-
-    const url =
-        "https://api.open-meteo.com/v1/forecast?latitude=59.33&longitude=18.07&daily=precipitation_probability_max&timezone=Europe%2FBerlin";
-    const res = await fetch(url);
-
-    if (!res.ok) {
-        // This will activate the closest `error.js` Error Boundary
-        throw new Error("Failed to fetch data");
+  
+  const records = [];
+  // Initialize the parser
+  const parser = parse({
+    delimiter: ",",
+  });
+  // Use the readable stream api to consume records
+  parser.on("readable", function () {
+    let record;
+    while ((record = parser.read()) !== null) {
+      records.push(record);
     }
-
-    const data = await res.json()
-    return Response.json(data)
+  });
+  // Catch any error
+  parser.on("error", function (err) {
+    console.error(err.message);
+  });
+  return parser;
 }
-
 
 //    const res = await fetch('https://data.mongodb-api.com/...', {
 //         next: { revalidate: 60 }, // Revalidate every 60 seconds
@@ -23,8 +30,7 @@ export async function GET(request: Request) {
 
 //       return Response.json(data)
 
+// const csvFilePath = '/assets/worldcities.csv';
 
-    // const csvFilePath = '/assets/worldcities.csv';
-
-    // const readed = parse(csvFilePath);
-    // return readed;
+// const readed = parse(csvFilePath);
+// return readed;
