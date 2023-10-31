@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { SlimCity } from 'src/utils/types';
-import { readCsv } from 'src/utils/utils';
+import { SlimCity } from 'utils/types';
+import { readCsv } from 'utils/utils';
 
 export async function GET() {
   const csvFilePath = "./assets/worldcities.csv";

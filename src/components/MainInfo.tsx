@@ -1,7 +1,7 @@
 "use client";
 import { ReactElement } from "react";
 import Form from "./CityForm";
-import { City } from "src/utils/types";
+import { City } from "utils/types";
 
 type Props = {
   perc: number;
@@ -22,7 +22,7 @@ export default function MainInfo({ perc, icon, word, test }: Props) {
       <div className="flex flex-col items-center justify-center space-y-2">
         <h2 className="text-3xl font-bold mr-2">{word && word}</h2>
         {perc >= 0 &&
-          perc <= 100 && ( // if a number is 0, 100, or in between -> if everything is working
+          perc <= 100 && ( // if a number is 0, 100, or in between, then perc was resolved successfully
             <h3 className="text-xl">
               <strong>{`${perc}%`}</strong> chance of rain
             </h3>
