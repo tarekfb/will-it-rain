@@ -1,6 +1,6 @@
 import { FormEvent, useId, useState } from 'react';
 import { getCity } from 'src/utils/api-calls';
-import { City } from 'src/utils/types';
+import { City } from 'utils/types';
 
 type Props = {
     setCity: (city: City) => void;
