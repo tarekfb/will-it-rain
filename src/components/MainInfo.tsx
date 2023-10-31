@@ -1,20 +1,20 @@
 "use client";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import Form from "./CityForm";
-import { City } from "utils/types";
+import { City, Weather } from "utils/types";
 
 type Props = {
   perc: number;
   icon: ReactElement;
   word: string;
-  test: any;
 };
 
-export default function MainInfo({ perc, icon, word, test }: Props) {
+export default function MainInfo({ perc, icon, word }: Props) {
+  const [city, setCity] = useState();
 
-  const setCity = (city: City): void => {
-    console.log(city)
-  }
+  const setCityHandler = (city: City): void => {
+    console.log(city);
+  };
   return (
     <>
       <h1 className="text-3xl">Will it rain?</h1>
@@ -27,7 +27,7 @@ export default function MainInfo({ perc, icon, word, test }: Props) {
               <strong>{`${perc}%`}</strong> chance of rain
             </h3>
           )}
-        <Form setCity={(city) => setCity(city)} />
+        <Form setCity={(city) => setCityHandler(city)} />
       </div>
     </>
   );

@@ -16,10 +16,9 @@ export async function readCsv(path: string): Promise<City[]> {
   });
 }
 
-export const basePath = (): string => {
-  const env = process.env.NODE_ENV;
-  const http = env === "development" ? "http" : "https";
-  const domain =
-    env === "development" ? "localhost:3000" : "wwww.willitrain.site";
-  return `${http}://${domain}/api/`;
-};
+export const basePath = (): string =>
+  `${
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "willitrain.site"
+  }/api/`;
