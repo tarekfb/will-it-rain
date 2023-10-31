@@ -59,7 +59,7 @@ export default async function Home() {
   const perc = await getPercentage();
   const icon = calcIcon(perc);
   const word = calcWord(perc);
-  const weather = await getCity("Stockholm");
+  // const weather = await getCity("Stockholm");
 
   return (
     <div className="min-h-screen min-w-screen flex flex-col items-center justify-center">
