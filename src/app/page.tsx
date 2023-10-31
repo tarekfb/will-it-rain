@@ -7,7 +7,6 @@ import {
   BsCloudRainHeavyFill,
 } from "react-icons/bs";
 import { TbDropletOff, TbQuestionMark, TbDropletHalf2 } from "react-icons/tb";
-import { getCity } from "src/utils/api-calls";
 import { Weather } from "utils/types";
 
 async function getWeather(): Promise<Response> {
