@@ -7,47 +7,18 @@ import {
   BsCloudRainHeavyFill,
 } from "react-icons/bs";
 import { TbDropletOff, TbQuestionMark, TbDropletHalf2 } from "react-icons/tb";
-import { Weather } from "src/utils/types";
+import { getCity, getWeather } from "src/utils/api-calls";
+// import { Weather } from "src/utils/types";
 
 
-async function getWeather(): Promise<Weather> {
-  const url =
-    "https://api.open-meteo.com/v1/forecast?latitude=59.33&longitude=18.07&daily=precipitation_probability_max&timezone=Europe%2FBerlin";
-  const res = await fetch(url);
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  return await res.json();
-}
-
-async function getWeatherNew() {
-  const res = await fetch("http://localhost:3000/api/weather")
-  const data = res.json();
-  console.log(data);
-  return data;
-}
 
 async function getPercentage(): Promise<number> {
-  const weather = await getWeatherNew();
+  const weather = await getWeather();
   return weather.daily.precipitation_probability_max[0];
 }
 
-async function getCities() {
-  const url = 'http://localhost:3000/api/city';
-  const res = await fetch(url);
-  console.log(res);
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
 
-  return await res.json();
-}
+
 
 const calcWord = (perc: number) => {
   if (perc < 5) return "Not likely";
@@ -74,8 +45,9 @@ export default async function Home() {
   const perc = await getPercentage();
   const icon = calcIcon(perc);
   const word = calcWord(perc);
-  const test = await getWeather();
-
+  const test = await getCity('Stockholm');
+  // const test2 = await getCities();
+  // console.log(test2)
   return (
     <div className="min-h-screen min-w-screen flex flex-col items-center justify-center">
       <div className="flex flex-col items-center justify-center space-y-10">

@@ -1,5 +1,7 @@
 "use client";
 import { ReactElement } from "react";
+import Form from "./CityForm";
+import { City } from "src/utils/types";
 
 type Props = {
   perc: number;
@@ -9,9 +11,10 @@ type Props = {
 };
 
 export default function MainInfo({ perc, icon, word, test }: Props) {
-  const testF = () => {
-    console.log(test);
-  };
+
+  const setCity = (city: City): void => {
+    console.log(city)
+  }
   return (
     <>
       <h1 className="text-3xl">Will it rain?</h1>
@@ -24,7 +27,7 @@ export default function MainInfo({ perc, icon, word, test }: Props) {
               <strong>{`${perc}%`}</strong> chance of rain
             </h3>
           )}
-        <button onClick={() => testF()}>hej</button>
+        <Form setCity={(city) => setCity(city)} />
       </div>
     </>
   );

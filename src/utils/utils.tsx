@@ -1,9 +1,17 @@
-import { parse } from 'csv-parse';
+import csv from 'csv-parser';
+import fs from 'fs';
+import { City } from 'src/utils/types';
 
-export function readCsv() {
-    const csvFilePath = '/assets/worldcities.csv';
-
-    const readed = parse(csvFilePath);
-    console.log(readed);
-    return readed;
+export async function readCsv(path: string): Promise<City[]> {
+    const results: City[] = [];
+    return new Promise((resolve) => {
+        fs.createReadStream(path)
+            .pipe(csv())
+            .on('data', (data: City) => {
+                results.push(data)
+            })
+            .on('end', () => {
+                resolve(results);
+            });
+    });
 }
