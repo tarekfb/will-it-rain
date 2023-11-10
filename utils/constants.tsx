@@ -26,6 +26,6 @@ export const citiesPath = (env: string) => {
     });
 
     const filePath = env === 'production' ? '/worldcities.csv' : '/worldcities.csv'
-    return filePath
+    return path1
 }
 
