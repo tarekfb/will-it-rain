@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { readCsv } from "utils/utils";
+import { citiesPath } from "utils/constants";
+import { readCsv } from "utils/read-csv";
 
 export async function GET(request: NextRequest) {
-  const csvFilePath = "./assets/worldcities.csv";
-  const cities = await readCsv(csvFilePath);
+  const cities = await readCsv(citiesPath(process.env.NODE_ENV));
 
   const param = request.nextUrl.searchParams.get("city");
   if (!param)
