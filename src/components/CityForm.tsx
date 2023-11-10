@@ -1,5 +1,5 @@
 import { FormEvent, useId, useState } from 'react';
-import { getCity } from 'src/utils/api-calls';
+import { getCity } from 'src/utils/api-calls-internal';
 import { City } from 'utils/types';
 
 type Props = {
@@ -12,7 +12,6 @@ export default function Form({ setCity }: Props) {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(value)
         const city = await getCity(value);
         setCity(city);
     }
