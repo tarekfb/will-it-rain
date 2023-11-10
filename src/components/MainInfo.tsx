@@ -2,6 +2,7 @@
 import { ReactElement, useState } from "react";
 import Form from "./CityForm";
 import { City, Weather } from "utils/types";
+import { isDevOnly } from "src/utils/utils";
 
 type Props = {
   perc: number;
@@ -15,6 +16,7 @@ export default function MainInfo({ perc, icon, word }: Props) {
   const setCityHandler = (city: City): void => {
     console.log(city);
   };
+
   return (
     <>
       <h1 className="text-3xl">Will it rain?</h1>
@@ -27,7 +29,9 @@ export default function MainInfo({ perc, icon, word }: Props) {
               <strong>{`${perc}%`}</strong> chance of rain
             </h3>
           )}
-        <Form setCity={(city) => setCityHandler(city)} />
+        {
+          isDevOnly() && <Form setCity={(city) => setCityHandler(city)} />
+        }
       </div>
     </>
   );
