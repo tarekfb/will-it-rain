@@ -3,7 +3,7 @@ import { citiesPath } from "utils/constants";
 import { readCsv } from "utils/read-csv";
 
 export async function GET(request: NextRequest) {
-  const cities = await readCsv(citiesPath(process.env.NODE_ENV));
+  const cities = await readCsv(citiesPath());
 
   const param = request.nextUrl.searchParams.get("city");
   if (!param)
