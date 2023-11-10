@@ -35,3 +35,8 @@ export type SlimCity = {
   id: string;
   city: string;
 }
+
+export type Coordinates = {
+  lat: number;
+  lng: number;
+}
