@@ -8,7 +8,7 @@ type Props = {
   setCity: (city: City) => void;
 };
 
-const h = 8;
+const h = 12;
 export default function Form({ setCity }: Props) {
   const cityInputId = useId();
   const [value, setValue] = useState("");
@@ -43,7 +43,7 @@ export default function Form({ setCity }: Props) {
               type="text"
               onChange={(e) => setValue(e.target.value)}
               value={value}
-              className={`text-gray-600 outline-none h-${h} leading-${h} w-40`}
+              className={`text-gray-600 outline-none h-full leading-${h} w-48`}
             />
           </label>
         </div>
