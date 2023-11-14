@@ -5,8 +5,8 @@ export async function getCity(city: string): Promise<City> {
   const url = `${basePath()}city?city=${city}`;
   const res = await fetch(url);
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch city");
+    const text = await res.text();
+    throw new Error(text);
   }
 
   return await res.json();

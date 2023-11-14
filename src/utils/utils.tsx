@@ -8,11 +8,13 @@ import {
 import { TbDropletOff, TbQuestionMark, TbDropletHalf2 } from "react-icons/tb";
 
 export const basePath = (): string =>
-  `${process.env.NODE_ENV === "production" ? "" : "http://localhost:3000"}/api/`;
+  `${
+    process.env.NODE_ENV === "production" ? "" : "http://localhost:3000"
+  }/api/`;
 
 export const isDevOnly = (): boolean => {
-  return process.env.NODE_ENV === "development"
-}
+  return process.env.NODE_ENV === "development";
+};
 
 export const calcWord = (perc: number) => {
   if (perc < 5) return "Not likely";
@@ -20,7 +22,7 @@ export const calcWord = (perc: number) => {
   if (perc < 50) return "Perhaps";
   if (perc < 75) return "Probably";
   if (perc < 95) return "Most likely";
-  if (perc < 100) return "Yes";
+  if (perc <= 100) return "Yes";
   return "We're not sure";
 };
 
@@ -33,4 +35,12 @@ export const calcIcon = (perc: number): ReactElement => {
   if (perc < 95) return <BsDropletFill size={size} />;
   if (perc < 100 || perc === 100) return <BsCloudRainHeavyFill size={size} />;
   return <TbQuestionMark size={size} />;
+};
+
+export const getErrorMessage = (error: unknown): string => {
+  let message: string;
+  if (error instanceof Error) message = error.message;
+  message = String(error);
+  message.replace(/\"/g, "");
+  return message;
 };
