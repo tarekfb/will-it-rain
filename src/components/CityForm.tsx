@@ -8,7 +8,7 @@ type Props = {
   setCity: (city: City) => void;
 };
 
-const h = 12;
+const h = 10;
 export default function Form({ setCity }: Props) {
   const cityInputId = useId();
   const [value, setValue] = useState("");
@@ -24,29 +24,28 @@ export default function Form({ setCity }: Props) {
   };
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
-      <div
-        className={`flex space-x-4 justify-center border-zinc-600 rounded-full border-solid bg-white px-8 h-${h}`}
-      >
-        <div className="flex items-center">
-          <CiSearch className="text-gray-600" size={24} />
-        </div>
-        <div>
-          <label>
-            <label htmlFor={cityInputId} className="hidden">
-              City
-            </label>
-            <input
-              id={cityInputId}
-              name="city"
-              placeholder="Search for a city"
-              type="text"
-              onChange={(e) => setValue(e.target.value)}
-              value={value}
-              className={`text-gray-600 outline-none h-full leading-${h} w-48`}
-            />
+    <form
+      onSubmit={(e) => handleSubmit(e)}
+      className={`flex space-x-4 justify-center border-zinc-600 rounded-full border-solid bg-white px-8 h-12 w-10/12`}
+    >
+      <div className="flex items-center">
+        <CiSearch className="text-gray-600" size={24} />
+      </div>
+      <div className="w-full flex items-center">
+        <label>
+          <label htmlFor={cityInputId} className="hidden">
+            City
           </label>
-        </div>
+          <input
+            id={cityInputId}
+            name="city"
+            placeholder="Search for a city"
+            type="text"
+            onChange={(e) => setValue(e.target.value)}
+            value={value}
+            className={`text-gray-600 outline-none leading-12 h-full}`}
+          />
+        </label>
       </div>
     </form>
   );
