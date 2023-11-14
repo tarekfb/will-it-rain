@@ -35,7 +35,7 @@ export default function MainInfo({ weather: weatherProp }: Props) {
     const { lat, lng } = city;
     const weather = await getWeather({ lat, lng });
     setWeather(weather);
-  }
+  };
 
   useEffect(() => {
     updateWeather();
@@ -52,10 +52,8 @@ export default function MainInfo({ weather: weatherProp }: Props) {
               <strong>{`${perc}%`}</strong> chance of rain
             </h3>
           )}
-        <h3 className="text-2xl font-bold mr-2">{city.city}</h3>
-        {
-          isDevOnly() && <Form setCity={(city) => setCity(city)} />
-        }
+        <h3 className="text-2xl font-bold mr-2 mb-2">{city.city}</h3>
+        <Form setCity={(city) => setCity(city)} />
       </div>
     </>
   );
