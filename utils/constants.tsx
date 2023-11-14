@@ -1,4 +1,8 @@
-import path from 'path';
+import path from "path";
 
-export const citiesPath = () => path.resolve('./assets/worldcities.csv')
-
+export const citiesPath = () => {
+  const filePath = path.resolve("./assets/worldcities.csv");
+  console.log('filepath is ', filePath)
+  console.log('cwd: ', process.cwd())
+  return filePath;
+};
