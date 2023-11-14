@@ -24,14 +24,15 @@ export default function Form({ setCity }: Props) {
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
       <label>
-        <label htmlFor={cityInputId}>City:</label>
+        <label htmlFor={cityInputId} className="hidden">City</label>
         <input
           id={cityInputId}
           name="city"
-          placeholder="Stockholm..."
+          placeholder="Search for a city"
           type="text"
           onChange={(e) => setValue(e.target.value)}
           value={value}
+          className="border-zinc-600 rounded-md border-solid p-1"
         />
       </label>
     </form>
