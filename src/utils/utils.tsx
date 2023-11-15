@@ -8,6 +8,14 @@ import {
 import { TbDropletOff, TbQuestionMark, TbDropletHalf2 } from "react-icons/tb";
 import { City } from "utils/types";
 
+export enum Brackets {
+  No = 3,
+  Unlikely = 25,
+  Possibly = 50,
+  Probably = 95,
+  Yes = 100,
+}
+
 export const basePath = (): string =>
   `${
     process.env.NODE_ENV === "production" ? "" : "http://localhost:3000"
@@ -19,6 +27,7 @@ export const isDevOnly = (): boolean => {
 
 export const calcIcon = (perc: number): ReactElement => {
   const size = 140;
+  Object.values(Brackets).map(bracket => console.log(bracket))
   if (perc < 5) return <TbDropletOff size={size} />;
   if (perc < 25) return <BsDroplet size={size} />;
   if (perc < 50) return <BsDropletHalf size={size} />;
