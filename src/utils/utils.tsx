@@ -6,6 +6,7 @@ import {
   BsCloudRainHeavyFill,
 } from "react-icons/bs";
 import { TbDropletOff, TbQuestionMark, TbDropletHalf2 } from "react-icons/tb";
+import { City } from "utils/types";
 
 export const basePath = (): string =>
   `${
@@ -33,4 +34,18 @@ export const getErrorMessage = (error: unknown): string => {
   message = String(error);
   message.replace(/\"/g, "");
   return message;
+};
+
+export const defaultCity: City = {
+  id: "1752425602",
+  city: "Stockholm",
+  city_ascii: "Stockholm",
+  lat: 59.3294,
+  lng: 18.0686,
+  country: "Sweden",
+  iso2: "SE",
+  iso3: "SWE",
+  adminName: "Stockholm",
+  capital: "primary",
+  population: 1611776,
 };
