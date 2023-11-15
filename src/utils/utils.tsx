@@ -8,6 +8,14 @@ import {
 import { TbDropletOff, TbQuestionMark, TbDropletHalf2 } from "react-icons/tb";
 import { City } from "utils/types";
 
+export enum PercentageBreaks {
+  No = 3,
+  Unlikely = 25,
+  Possibly = 50,
+  Probably = 95,
+  Yes = 100,
+}
+
 export const basePath = (): string =>
   `${
     process.env.NODE_ENV === "production" ? "" : "http://localhost:3000"
@@ -19,12 +27,12 @@ export const isDevOnly = (): boolean => {
 
 export const calcIcon = (perc: number): ReactElement => {
   const size = 140;
-  if (perc < 5) return <TbDropletOff size={size} />;
-  if (perc < 25) return <BsDroplet size={size} />;
-  if (perc < 50) return <BsDropletHalf size={size} />;
-  if (perc < 75) return <TbDropletHalf2 size={size} />;
-  if (perc < 95) return <BsDropletFill size={size} />;
-  if (perc < 100 || perc === 100) return <BsCloudRainHeavyFill size={size} />;
+
+  if (perc <= PercentageBreaks.No) return <TbDropletOff size={size} />;
+  if (perc <= PercentageBreaks.Unlikely) return <BsDroplet size={size} />;
+  if (perc <= PercentageBreaks.Possibly) return <BsDropletHalf size={size} />;
+  if (perc <= PercentageBreaks.Probably) return <BsDropletFill size={size} />;
+  if (perc <= PercentageBreaks.Yes) return <BsCloudRainHeavyFill size={size} />;
   return <TbQuestionMark size={size} />;
 };
 
