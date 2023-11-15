@@ -2,22 +2,38 @@
 import { useState, useEffect } from "react";
 import Form from "./CityForm";
 import { City, Weather } from "utils/types";
-import { calcIcon, defaultCity } from "src/utils/utils";
-import { getWeather } from "utils/api-calls-external";
+import { calcIcon, getErrorMessage } from "src/utils/utils";
+import { getWeather, createCityCookie } from "utils/api-calls-external";
+import { getCity } from "src/utils/api-calls-internal";
 
 type Props = {
   weather: Weather;
   city: City;
 };
 
-export default function MainInfo({ weather: weatherProp, city: cityProp }: Props) {
+export default function MainInfo({
+  weather: weatherProp,
+  city: cityProp,
+}: Props) {
   const [city, setCity] = useState<City>(cityProp);
   const [weather, setWeather] = useState<Weather>(weatherProp);
 
   const perc = weather.daily.precipitation_probability_max[0];
   const icon = calcIcon(perc);
 
+  const setCityHandler = async (cityInput: string) => {
+    if (city.city === cityInput) return;
+    try {
+      const newCity = await getCity(cityInput);
+      if (city.id !== newCity.id) setCity(newCity);
+    } catch (error) {
+      alert(getErrorMessage(error));
+    }
+  };
+
   const updateWeather = async () => {
+    createCityCookie(city);
+
     const { lat, lng } = city;
     const weather = await getWeather({ lat, lng });
     setWeather(weather);
@@ -42,7 +58,7 @@ export default function MainInfo({ weather: weatherProp, city: cityProp }: Props
           </div>
         </>
       </div>
-      <Form setCity={(city) => setCity(city)} />
+      <Form setCity={(city) => setCityHandler(city)} />
     </>
   );
 }
