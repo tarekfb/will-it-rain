@@ -1,3 +1,4 @@
+'use server'
 import { getWeather } from "utils/api-calls-external";
 import MainInfo from "../components/MainInfo";
 import { cookies } from "next/headers";

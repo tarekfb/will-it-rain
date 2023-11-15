@@ -1,11 +1,8 @@
 import { FormEvent, useId, useState } from "react";
-import { getCity } from "src/utils/api-calls-internal";
-import { getErrorMessage } from "src/utils/utils";
-import { City } from "utils/types";
 import { CiSearch } from "react-icons/ci";
 
 type Props = {
-  setCity: (city: City) => void;
+  setCity: (city: string) => void;
 };
 
 const h = 10;
@@ -15,12 +12,10 @@ export default function Form({ setCity }: Props) {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const city = await getCity(value);
-      setCity(city);
-    } catch (error) {
-      alert(getErrorMessage(error));
-    }
+    if (!value) return;
+    const validCityRegexp = /^[\p{L}\d\s-]+$/u;
+    if (!value.match(validCityRegexp)) alert("Invalid input");
+    else setCity(value);
   };
 
   return (
