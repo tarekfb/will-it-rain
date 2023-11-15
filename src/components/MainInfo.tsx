@@ -2,29 +2,16 @@
 import { useState, useEffect } from "react";
 import Form from "./CityForm";
 import { City, Weather } from "utils/types";
-import { calcIcon } from "src/utils/utils";
+import { calcIcon, defaultCity } from "src/utils/utils";
 import { getWeather } from "utils/api-calls-external";
 
 type Props = {
   weather: Weather;
+  city: City;
 };
 
-const defaultCity: City = {
-  id: "1752425602",
-  city: "Stockholm",
-  city_ascii: "Stockholm",
-  lat: 59.3294,
-  lng: 18.0686,
-  country: "Sweden",
-  iso2: "SE",
-  iso3: "SWE",
-  adminName: "Stockholm",
-  capital: "primary",
-  population: 1611776,
-};
-
-export default function MainInfo({ weather: weatherProp }: Props) {
-  const [city, setCity] = useState<City>(defaultCity);
+export default function MainInfo({ weather: weatherProp, city: cityProp }: Props) {
+  const [city, setCity] = useState<City>(cityProp);
   const [weather, setWeather] = useState<Weather>(weatherProp);
 
   const perc = weather.daily.precipitation_probability_max[0];
