@@ -27,7 +27,6 @@ export default function Form({ setCity }: Props) {
         <CiSearch className="text-gray-600" size={24} />
       </div>
       <div className="w-full flex items-center">
-        <label>
           <label htmlFor={cityInputId} className="hidden">
             City
           </label>
@@ -38,9 +37,8 @@ export default function Form({ setCity }: Props) {
             type="text"
             onChange={(e) => setValue(e.target.value)}
             value={value}
-            className={`text-gray-600 outline-none leading-12 h-full}`}
+            className={`text-gray-600 outline-none leading-12 h-full`}
           />
-        </label>
       </div>
     </form>
   );
