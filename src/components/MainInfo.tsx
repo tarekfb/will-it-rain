@@ -17,6 +17,7 @@ export default function MainInfo({
 }: Props) {
   const [city, setCity] = useState<City>(cityProp);
   const [weather, setWeather] = useState<Weather>(weatherProp);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const perc = weather.daily.precipitation_probability_max[0];
   const icon = calcIcon(perc);
@@ -24,11 +25,13 @@ export default function MainInfo({
   const setCityHandler = async (cityInput: string) => {
     if (city.city === cityInput) return;
     try {
+      setLoading(true);
       const newCity = await getCity(cityInput);
       if (city.id !== newCity.id) setCity(newCity);
     } catch (error) {
       alert(getErrorMessage(error));
     }
+    setLoading(false);
   };
 
   const updateWeather = async () => {
@@ -46,19 +49,18 @@ export default function MainInfo({
   return (
     <>
       {icon}
-      <div
+      <section
         className="flex flex-col justify'
         space-y-8 border-gray-200 border-solid rounded-3xl bg-gray-800 pl-10 pr-20 py-8 w-10/12 "
       >
-        <>
-          <h3 className="text-4xl">{city.city}</h3>
-          <div className="flex flex-col space-y-1.5">
-            <h2 className="text-6xl font-semibold">{`${perc}%`}</h2>
-            <p className="text-gray-200 text-2xl">Chance of rain</p>
-          </div>
-        </>
-      </div>
-      <Form setCity={(city) => setCityHandler(city)} />
+       
+        <h3 className="text-4xl">{city.city}</h3>
+        <div className="flex flex-col space-y-1.5">
+          <h2 className="text-6xl font-semibold">{`${perc}%`}</h2>
+          <p className="text-gray-200 text-2xl">Chance of rain</p>
+        </div>
+      </section>
+      <Form setCity={(city) => setCityHandler(city)} loading={loading} />
     </>
   );
 }
