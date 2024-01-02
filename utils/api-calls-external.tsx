@@ -10,8 +10,7 @@ export async function getWeather(coords: Coordinates): Promise<Weather> {
     throw new Error("Failed to fetch weather");
   }
 
-  const data: Weather = await res.json();
-  return data;
+  return await res.json();
 }
 
 export async function createCityCookie(city: City) {

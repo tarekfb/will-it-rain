@@ -1,6 +1,7 @@
 import { FormEvent, useId, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { ThreeDots } from "react-loader-spinner";
+import { enqueueSnackbar } from "notistack";
 
 type Props = {
   setCity: (city: string) => void;
@@ -16,7 +17,8 @@ export default function Form({ setCity, loading }: Props) {
     e.preventDefault();
     if (!value) return;
     const validCityRegexp = /^[\p{L}\d\s-]+$/u;
-    if (!value.match(validCityRegexp)) alert("Invalid input");
+    if (!value.match(validCityRegexp))
+      enqueueSnackbar("Invalid input", { variant: "error" });
     else setCity(value);
   };
 

@@ -40,8 +40,7 @@ export const getErrorMessage = (error: unknown): string => {
   let message: string;
   if (error instanceof Error) message = error.message;
   message = String(error);
-  message.replace(/\"/g, "");
-  return message;
+  return message.replace(/\"/g, "").replace("Error: ", "") // remove "" and more
 };
 
 export const defaultCity: City = {

@@ -5,6 +5,7 @@ import { City, Weather } from "utils/types";
 import { calcIcon, getErrorMessage } from "src/utils/utils";
 import { getWeather, createCityCookie } from "utils/api-calls-external";
 import { getCity } from "src/utils/api-calls-internal";
+import { SnackbarProvider, enqueueSnackbar } from "notistack";
 
 type Props = {
   weather: Weather;
@@ -29,7 +30,7 @@ export default function MainInfo({
       const newCity = await getCity(cityInput);
       if (city.id !== newCity.id) setCity(newCity);
     } catch (error) {
-      alert(getErrorMessage(error));
+      enqueueSnackbar(getErrorMessage(error), { variant: "error" });
     }
     setLoading(false);
   };
@@ -53,13 +54,13 @@ export default function MainInfo({
         className="flex flex-col justify'
         space-y-8 border-gray-200 border-solid rounded-3xl bg-gray-800 pl-10 pr-20 py-8 w-10/12 "
       >
-       
         <h3 className="text-4xl">{city.city}</h3>
         <div className="flex flex-col space-y-1.5">
           <h2 className="text-6xl font-semibold">{`${perc}%`}</h2>
           <p className="text-gray-200 text-2xl">Chance of rain</p>
         </div>
       </section>
+      <SnackbarProvider />
       <Form setCity={(city) => setCityHandler(city)} loading={loading} />
     </>
   );
