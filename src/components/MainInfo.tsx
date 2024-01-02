@@ -12,6 +12,11 @@ type Props = {
   city: City;
 };
 
+const getDateText = (): string => {
+  const date = Date.now();
+  return date.toString();
+};
+
 export default function MainInfo({
   weather: weatherProp,
   city: cityProp,
@@ -19,6 +24,20 @@ export default function MainInfo({
   const [city, setCity] = useState<City>(cityProp);
   const [weather, setWeather] = useState<Weather>(weatherProp);
   const [loading, setLoading] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const perc = weather.daily.precipitation_probability_max[0];
   const icon = calcIcon(perc);
@@ -54,6 +73,7 @@ export default function MainInfo({
         className="flex flex-col justify'
         space-y-8 border-gray-200 border-solid rounded-3xl bg-gray-800 pl-10 pr-20 py-8 w-10/12 "
       >
+        <p>{getDateText()}</p>
         <h3 className="text-4xl">{city.city}</h3>
         <div className="flex flex-col space-y-1.5">
           <h2 className="text-6xl font-semibold">{`${perc}%`}</h2>
@@ -61,7 +81,15 @@ export default function MainInfo({
         </div>
       </section>
       <SnackbarProvider />
-      <Form setCity={(city) => setCityHandler(city)} loading={loading} />
+      <div className="flex justify-between sm:justify-center items-center space-x-4 w-full">
+        <Form setCity={(city) => setCityHandler(city)} loading={loading} />
+      </div>
     </>
   );
 }
+
+/*
+need to adapt layout acccording to figma
+use breakpoints and check if mobile to rearrange everything
+https://tailwindcss.com/docs/responsive-design
+*/
