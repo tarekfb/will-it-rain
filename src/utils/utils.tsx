@@ -16,6 +16,12 @@ export enum PercentageBreaks {
   Yes = 100,
 }
 
+export enum RainVariants {
+  RAINY = "rainy.png",
+  SLIGHTLY_RAINY = "slightly-rainy.png",
+  NOT_RAINY = "not-rainy.png"
+}
+
 export const basePath = (): string =>
   `${
     process.env.NODE_ENV === "production" ? "" : "http://localhost:3000"
@@ -34,6 +40,13 @@ export const calcIcon = (perc: number): ReactElement => {
   if (perc <= PercentageBreaks.Probably) return <BsDropletFill size={size} />;
   if (perc <= PercentageBreaks.Yes) return <BsCloudRainHeavyFill size={size} />;
   return <TbQuestionMark size={size} />;
+};
+
+export const calcBg = (perc: number): RainVariants | undefined => {
+  if (perc <= PercentageBreaks.Unlikely) return RainVariants.NOT_RAINY;
+  if (perc <= PercentageBreaks.Possibly) return RainVariants.SLIGHTLY_RAINY ;
+  if (perc <= PercentageBreaks.Probably) return RainVariants.RAINY;
+  return undefined;
 };
 
 export const getErrorMessage = (error: unknown): string => {
