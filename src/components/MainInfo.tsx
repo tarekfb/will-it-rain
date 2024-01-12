@@ -3,8 +3,6 @@ import { useState, useEffect } from "react";
 import Form from "./CityForm";
 import { City, Weather } from "utils/types";
 import {
-  RainVariants,
-  calcBg,
   calcIcon,
   getErrorMessage,
 } from "src/utils/utils";
@@ -23,18 +21,15 @@ const getDateText = (): string => {
 type Props = {
   weather: Weather;
   city: City;
-  bg: RainVariants;
 };
 
 export default function MainInfo({
   weather: weatherProp,
   city: cityProp,
-  bg: bgProp,
 }: Props) {
   const [city, setCity] = useState<City>(cityProp);
   const [weather, setWeather] = useState<Weather>(weatherProp);
   const [loading, setLoading] = useState<boolean>(false);
-  const [bg, setBg] = useState<RainVariants | undefined>(bgProp);
 
   const perc = weather.daily.precipitation_probability_max[0];
   const icon = calcIcon(perc);
@@ -78,9 +73,7 @@ export default function MainInfo({
     <>
       {icon}
       <section
-        className={`flex flex-col justify-center space-y-8 border-gray-200 border-solid rounded-3xl bg-gray-800 pl-10 pr-20 py-8 w-10/12 ${
-          bg ? `bg-${bg}` : `bg-gray-800`
-        }`}
+        className={`flex flex-col justify-center space-y-8 border-gray-200 border-solid rounded-3xl bg-gray-800 pl-10 pr-20 py-8 w-10/12`}
       >
         <p>{getDateText()}</p>
         <h3 className="text-4xl">{city.city}</h3>
@@ -96,9 +89,3 @@ export default function MainInfo({
     </>
   );
 }
-
-/*
-need to adapt layout acccording to figma
-use breakpoints and check if mobile to rearrange everything
-https://tailwindcss.com/docs/responsive-design
-*/

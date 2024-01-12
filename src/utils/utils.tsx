@@ -17,9 +17,10 @@ export enum PercentageBreaks {
 }
 
 export enum RainVariants {
-  RAINY = "rainy.png",
-  SLIGHTLY_RAINY = "slightly-rainy.png",
-  NOT_RAINY = "not-rainy.png"
+  RAINY = "rainy",
+  SLIGHTLY_RAINY = "slightly-rainy",
+  NOT_RAINY = "not-rainy",
+  DEFAULT = "default"
 }
 
 export const basePath = (): string =>
@@ -42,11 +43,11 @@ export const calcIcon = (perc: number): ReactElement => {
   return <TbQuestionMark size={size} />;
 };
 
-export const calcBg = (perc: number): RainVariants | undefined => {
+export const calcBg = (perc: number): RainVariants => {
   if (perc <= PercentageBreaks.Unlikely) return RainVariants.NOT_RAINY;
   if (perc <= PercentageBreaks.Possibly) return RainVariants.SLIGHTLY_RAINY ;
-  if (perc <= PercentageBreaks.Probably) return RainVariants.RAINY;
-  return undefined;
+  if (perc <= PercentageBreaks.Yes) return RainVariants.RAINY;
+  return RainVariants.DEFAULT;
 };
 
 export const getErrorMessage = (error: unknown): string => {
