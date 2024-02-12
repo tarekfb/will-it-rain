@@ -31,3 +31,7 @@ body {
 input, select, textarea{
   color: black
 }
+
+.placeholder-white::placeholder	{
+  color: #fff;	
+}
