@@ -33,17 +33,6 @@ export default function MainInfo({
 
   const perc = weather.daily.precipitation_probability_max[0];
   const icon = calcIcon(perc);
-  // const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     setIsMobile(window.innerWidth <= 768);
-  //   };
-  //   window.addEventListener('resize', handleResize);
-  //   return () => {
-  //     window.removeEventListener('resize', handleResize);
-  //   };
-  // }, []);
 
   const setCityHandler = async (cityInput: string) => {
     if (city.city === cityInput) return;
