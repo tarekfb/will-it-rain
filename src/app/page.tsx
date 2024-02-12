@@ -13,15 +13,22 @@ const initGetCity = (): City => {
   return city;
 };
 
+
+
 export default async function Home() {
   const city = initGetCity();
   const weather = await getWeather({ lat: city?.lat, lng: city?.lat });
   const bg = calcBg(weather.daily.precipitation_probability_max[0]);
-
+  
+  const bgStyle = {
+    backgroundImage: `url('/${bg}.png')`,
+  };
+  
   return (
     <div
-      className={`min-h-screen min-w-screen flex flex-row items-center justify-center bg-${bg}`}
-    >
+      className={`min-h-screen min-w-screen flex flex-row items-center justify-center `}
+      style={bgStyle}
+      >
       <div className="flex flex-col items-center justify-center space-y-10 w-full">
         <h1 className="text-3xl font-semibold">Will it rain today?</h1>
         <MainInfo weather={weather} city={city ?? defaultCity} />
