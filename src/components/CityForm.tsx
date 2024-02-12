@@ -24,10 +24,10 @@ export default function Form({ setCity, loading }: Props) {
   return (
     <form
       onSubmit={(e) => handleSubmit(e)}
-      className={`flex space-x-4 justify-center border-zinc-600 rounded-full border-solid bg-white px-8 h-12 w-10/12`}
+      className={`text-white flex space-x-4 justify-center border-zinc-600 rounded-full border-solid px-8 h-12 w-10/12 bg-opacity-20 bg-gray-100 backdrop-filter backdrop-blur-lg`}
     >
       <div className="flex items-center">
-        <CiSearch className="text-gray-600" size={24} />
+        <CiSearch className="" size={24} />
       </div>
       {loading ? (
         <div className="w-full flex justify-center items-center">
@@ -40,18 +40,18 @@ export default function Form({ setCity, loading }: Props) {
           />
         </div>
       ) : (
-        <div className="w-full flex items-center">
+        <div className="w-full flex items-center bg-transparent ">
           <label htmlFor={cityInputId} className="hidden">
             City
           </label>
           <input
             id={cityInputId}
             name="city"
-            placeholder="Search for a city"
+            placeholder="Search city"
             type="text"
             onChange={(e) => setValue(e.target.value)}
             value={value}
-            className={`text-gray-600 outline-none leading-12 h-full`}
+            className={`placeholder-white text-white outline-none leading-12 h-full bg-transparent`}
           />
         </div>
       )}
