@@ -51,7 +51,7 @@ export default function Form({ setCity, loading }: Props) {
             type="text"
             onChange={(e) => setValue(e.target.value)}
             value={value}
-            className={`text-gray-600 outline-none leading-12 h-full`}
+            className={`text-gray-600 outline-none overflow-y-auto w-full`}
           />
         </div>
       )}
