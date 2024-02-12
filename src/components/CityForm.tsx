@@ -35,7 +35,7 @@ export default function Form({ setCity, loading }: Props) {
             height="80"
             width="80"
             radius="9"
-            color="#515151"
+            color="#fff"
             ariaLabel="three-dots-loading"
           />
         </div>
