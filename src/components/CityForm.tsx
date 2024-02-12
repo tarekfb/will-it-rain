@@ -8,7 +8,6 @@ type Props = {
   loading: boolean;
 };
 
-const h = 10;
 export default function Form({ setCity, loading }: Props) {
   const cityInputId = useId();
   const [value, setValue] = useState("");

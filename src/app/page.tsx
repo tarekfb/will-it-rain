@@ -1,9 +1,9 @@
-'use server'
+"use server";
 import { getWeather } from "utils/api-calls-external";
 import MainInfo from "../components/MainInfo";
 import { cookies } from "next/headers";
 import { City } from "utils/types";
-import { defaultCity } from "src/utils/utils";
+import { calcBg, defaultCity } from "src/utils/utils";
 
 const initGetCity = (): City => {
   const cookieStore = cookies();
@@ -13,12 +13,22 @@ const initGetCity = (): City => {
   return city;
 };
 
+
+
 export default async function Home() {
   const city = initGetCity();
   const weather = await getWeather({ lat: city?.lat, lng: city?.lat });
-
+  const bg = calcBg(weather.daily.precipitation_probability_max[0]);
+  
+  const bgStyle = {
+    backgroundImage: `url('/${bg}.png')`,
+  };
+  
   return (
-    <div className="min-h-screen min-w-screen flex flex-col items-center justify-center">
+    <div
+      className={`min-h-screen min-w-screen flex flex-row items-center justify-center `}
+      style={bgStyle}
+      >
       <div className="flex flex-col items-center justify-center space-y-10 w-full">
         <h1 className="text-3xl font-semibold">Will it rain today?</h1>
         <MainInfo weather={weather} city={city ?? defaultCity} />
