@@ -27,7 +27,7 @@ export default async function Home() {
 
   return (
     <div
-      className={`min-h-screen min-w-screen flex flex-row items-center justify-center `}
+      className={`min-h-screen min-w-screen flex flex-row items-center justify-center`}
       style={bgStyle}
     >
       <div className="flex flex-col items-center justify-center space-y-10 w-full">
