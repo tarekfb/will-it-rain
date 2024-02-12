@@ -51,7 +51,7 @@ export default function Form({ setCity, loading }: Props) {
             type="text"
             onChange={(e) => setValue(e.target.value)}
             value={value}
-            className={`placeholder-white text-white outline-none leading-12 h-full bg-transparent`}
+            className={`placeholder-white text-white overflow-y-auto w-full outline-none leading-12 h-full bg-transparent`}
           />
         </div>
       )}
