@@ -1,6 +1,6 @@
 # Next.js weather app
 
-### Lighthouse
+### Lighthouse score
 
 [100, 97, 100, 100](https://github.com/tarekfb/will-it-rain/assets/56593098/b4ae0fda-d605-43ae-b2c4-a99322b54ebd)
 
