@@ -77,7 +77,7 @@ export default function MainInfo({
     <>
       {icon}
       <section
-        className={`flex flex-col justify-center space-y-8 border-gray-300 border-solid rounded-3xl pl-10 pr-20 py-8 w-10/12 bg-opacity-20 bg-gray-100 backdrop-filter backdrop-blur-lg`}
+        className={`flex flex-col justify-center space-y-8 border-gray-300 border-solid rounded-3xl pl-10 pr-20 py-8 w-10/12 bg-opacity-20 bg-gray-100 backdrop-filter backdrop-blur-lg overflow-hidden`}
       >
         <p>{getDateText()}</p>
         <h3 className="text-4xl">{city.city}</h3>
