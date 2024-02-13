@@ -7,12 +7,30 @@ import { getWeather, createCityCookie } from "utils/api-calls-external";
 import { getCity } from "src/utils/api-calls-internal";
 import { SnackbarProvider, closeSnackbar, enqueueSnackbar } from "notistack";
 
+// const getDateText = (): string => {
+//   const currentDate = new Date();
+//   const day = currentDate.getDate();
+//   const year = currentDate.getUTCFullYear();
+//   const month = currentDate.getMonth() + 1; // Months are zero-based, so adding 1 to get the actual month
+//   return `Today -  ${day}/${month}/${year}`;
+// };
+
 const getDateText = (): string => {
   const currentDate = new Date();
   const day = currentDate.getDate();
   const year = currentDate.getUTCFullYear();
-  const month = currentDate.getMonth() + 1; // Months are zero-based, so adding 1 to get the actual month
-  return `Today -  ${day}/${month}/${year}`;
+
+  // Define an array of month names
+  const monthNames = [
+    'January', 'February', 'March', 'April',
+    'May', 'June', 'July', 'August',
+    'September', 'October', 'November', 'December'
+  ];
+
+  // Get the month name based on the current month
+  const month = monthNames[currentDate.getMonth()];
+
+  return `${day} ${month} ${year}`;
 };
 
 type Props = {
