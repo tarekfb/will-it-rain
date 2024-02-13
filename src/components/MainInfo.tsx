@@ -2,13 +2,10 @@
 import { useState, useEffect } from "react";
 import Form from "./CityForm";
 import { City, Weather } from "utils/types";
-import {
-  calcIcon,
-  getErrorMessage,
-} from "src/utils/utils";
+import { calcIcon, getErrorMessage } from "src/utils/utils";
 import { getWeather, createCityCookie } from "utils/api-calls-external";
 import { getCity } from "src/utils/api-calls-internal";
-import { SnackbarProvider, enqueueSnackbar } from "notistack";
+import { SnackbarProvider, closeSnackbar, enqueueSnackbar } from "notistack";
 
 const getDateText = (): string => {
   const currentDate = new Date();
@@ -71,7 +68,11 @@ export default function MainInfo({
           <p className="text-gray-200 text-2xl">Chance of rain</p>
         </div>
       </section>
-      <SnackbarProvider />
+      <SnackbarProvider
+        action={(snackbarId) => (
+          <button onClick={() => closeSnackbar(snackbarId)}>Dismiss</button>
+        )}
+      />
       <div className="flex justify-center items-center space-x-4 w-full">
         <Form setCity={(city) => setCityHandler(city)} loading={loading} />
       </div>
