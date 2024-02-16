@@ -1,11 +1,11 @@
 # Next.js weather app
 
-### Lighthouse score
+## Lighthouse score
 
 [100, 97, 100, 100](https://github.com/tarekfb/will-it-rain/assets/56593098/b4ae0fda-d605-43ae-b2c4-a99322b54ebd)
 
 
-### What tech is used?
+## What tech is used?
 
 - `next.js`: 14.1
 - `react`: 18.1
@@ -13,7 +13,7 @@
 - `typescript`: latest
 - `eslint`: 8.5.6
 
-### What features are implemented?
+## What features are implemented?
 
 Shortly put, this website has a large (46k+) list of cities. The UI displays today's probability of rain in either your location, or a city of choice.
 
