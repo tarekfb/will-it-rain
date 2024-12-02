@@ -25,21 +25,8 @@ Additionally, the repo has a internal API endpoints that the frontend communicat
 
 First, run the development server:
 
-```bash
-
+```
 npm  run  dev
-
-# or
-
-yarn  dev
-
-# or
-
-pnpm  dev
-
-# or
-
-bun  dev
 
 ```
 
